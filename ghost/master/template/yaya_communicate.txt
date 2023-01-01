@@ -1,0 +1,165 @@
+//******************************************************************************
+// communicate event
+//******************************************************************************
+OnCommunicate
+{
+	if reference[2] == 'ECHO/1.0' {			//台本コミュニケート対応
+		SHIORI3FW.EscapeDangerousTags(reference[3])
+		res_reference[0] = reference[0]
+		marker = 'Communicate from ' + reference[0]
+	} elseif reference[2] == 'JPRadish' {	//大根コミュニケート対応
+		sys.fnc.ExecuteJPRadish(reference)
+	}
+}
+sys.fnc.ExecuteJPRadish
+{
+	res_reference[0] = _argv[0]
+	res_reference[1] = 'JPRadish'
+
+	case _argv[0] {
+	when '暦にしき' {
+		case _argv[3] {
+		when 'complete' {
+			"\s[5]ありがとうございます！\_w[1000]\s[1]%(username)と、\_w[500]どうやって過ごそうかな…。\e"
+		}
+		when 'yet' {
+			"\s[2]あ…、\_w[500]もう覚えて頂いていましたね。\e"
+		}
+		others {
+			ERASEVAR('res_reference')
+		}
+		}
+	}
+	others {
+		case _argv[3] {
+		when 'しりとり依頼' {
+			sys.fnc.Shiripakuri.Agree(_argv)
+		}
+		when 'しりとり承諾' {
+			sys.fnc.Shiripakuri.Start(_argv)
+		}
+		when 'しりとりお前の番' {
+			sys.fnc.Shiripakuri.Continue(_argv)
+		}
+		when 'しりとり終了' {
+			sys.fnc.Shiripakuri.End(_argv)
+		}
+		when 'ユーザからプレゼント' {
+			sys.fnc.GetPresentFromUser(_argv)
+		}
+		others {
+			ERASEVAR('res_reference')
+		}
+		}
+	}
+	}
+}
+sys.fnc.Shiripakuri.Agree
+{
+	res_reference[2] = 'しりとり承諾'
+
+	if _argv[0] == 'きゅーぴっど' {
+		'\0\s[5]いいよ、きゅーちゃんからどうぞ。\_w[500]\e'
+	} else {
+		"\0\s[5]いいですよ、%(_argv[0])さん。\_w[500]\e"
+		"\0\s[5]負けませんよ、%(_argv[0])さん。\_w[1000]/
+			\n\s[0]%(_argv[0])さんからどうぞ。\_w[500]\e"
+	}
+}
+sys.fnc.Shiripakuri.Start
+{
+	res_reference[2] = 'しりとりお前の番'
+	_str1 = Shiritori
+	_str2 = _str1[0,'Ｘ']
+	_str3 = _str1[1,'Ｘ']
+	res_reference[3] = _str2 + '☆' + _str3
+
+	"\0\s[0]じゃあ、始めますね。\_w[1000]/
+		\n\s[6]ええと……。\_w[1000]/
+		\n\s[5]%(_str2)。\_w[1000]\e"
+}
+sys.fnc.Shiripakuri.Continue
+{
+	_str1 = _argv[4][0,'☆']
+	_str2 = _argv[4][1,'☆']
+	_str2 = SUBSTR(_str2,-1,1)
+	if _str2 == 'ん' {
+		res_reference[2] = 'しりとり終了'
+
+		if _argv[0] == 'きゅーぴっど' {
+			'\0\s[5]きゅーちゃんの負けだね。\_w[500]\e'
+		} else {
+			"\0\s[0]……あ。\_w[500]/
+				\n\s[5]%(_argv[0])さんの負けですね。\_w[500]\e"
+			"\0\s[5]あは。\_w[500]/
+				\n\s[8]%(_argv[0])さん、「ん」が付きましたね。\_w[500]\e"
+		}
+	} else {
+		_str3 = EVAL("Shiritori_%(_str2)")
+		if _str3 == '' {
+			res_reference[2] = 'しりとり終了'
+			res_reference[3] = '参りました'
+
+			if _argv[0] == 'きゅーぴっど' {
+				'\0\s[4]もう思いつかないよぉ……。\_w[500]\e'
+			} else {
+				"\0\s[3]もう思いつきません……。\_w[500]/
+					\n\s[6]参りました、%(_argv[0])さん。\_w[500]\e"
+				'\0\s[4]……降参します。\_w[500]\e'
+			}
+		} else {
+			res_reference[2] = 'しりとりお前の番'
+			_str4 = _str3[0,'Ｘ']
+			_str5 = _str3[1,'Ｘ']
+			_str5 = SUBSTR(_str5,-1,1)
+			res_reference[3] = _str4 + '☆' + _str5
+			"\0\s[6]「%(_str1)」ですか。\_w[500]\n\s[5]では、「%(_str4)」。\_w[500]\e"
+			"\0\s[3]「%(_str1)」かぁ……。\_w[500]\n\s[7]「%(_str4)」！\_w[500]\e"
+			"\0\s[6]えっと……。\_w[500]\n\s[0]「%(_str4)」。\_w[500]\e"
+			"\0\s[0]ならば……。\_w[500]\n\s[5]「%(_str4)」。\_w[500]\e"
+		}
+	}
+}
+sys.fnc.Shiripakuri.End
+{
+	ERASEVAR('res_reference')
+
+	if _argv[4] == '参りました' {
+		if _argv[0] == 'きゅーぴっど' {
+			'\0\s[5]また遊ぼうね、きゅーちゃん。\e'
+			'\0\s[5]残念だったね、きゅーちゃん。\e'
+		} else {
+			"\0\s[5]また遊んでくださいね、%(_argv[0])さん。\e"
+			"\0\s[5]%(_argv[0])さん、いつでもお相手しますよ。\e"
+		}
+	} else {
+		if _argv[0] == 'きゅーぴっど' {
+			'\0\s[4]きゅーちゃん、手加減してよ……。\e'
+			'\0\s[9]きゅーちゃんって強いんだね。\e'
+		} else {
+			'\0\s[4]次は負けませんよ……。\e'
+			"\0\s[9]%(_argv[0])さんって、お強いんですね。\e"
+		}
+	}
+}
+sys.fnc.GetPresentFromUser
+{
+	if _argv[4] == '福袋' {
+		'\0\s[2]え……？\_w[1000]/
+			\n\s[2]わ、私が開けていいんですか……？\_w[1000]/
+			\n\s[5]あ、'
+			--
+			Shiritori[0,'Ｘ'] + 'っぽい' + Shiritori[0,'Ｘ']
+			Shiritori[0,'Ｘ'] + '風味の' + Shiritori[0,'Ｘ']
+			Shiritori[0,'Ｘ'] + '色の' + Shiritori[0,'Ｘ']
+			Shiritori[0,'Ｘ'] + 'と' + Shiritori[0,'Ｘ'] + 'の' + Shiritori[0,'Ｘ']
+			--
+			"が入っていましたよ。\_w[1000]/
+			\n\s[1]素敵ですね、%(username)……。\e"
+	} else {
+		"\0\s[2]え……？\_w[1000]/
+			\n\s[2]わ、私にですか……？\_w[1000]/
+			\n\s[5]あ、ありがとうございます、%(username)。\_w[1000]/
+			\n\s[1]素敵な%(_argv[4])ですね……。\e"
+	}
+}

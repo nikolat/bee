@@ -1,0 +1,9 @@
+//http://page.freett.com/gallnuts/ghost/koyomi_nishiki/readme_EX3.txt
+
+//基本イベントへの対応情報
+元日
+バレンタインデー
+七夕
+ハロウィン
+クリスマス
+大晦日

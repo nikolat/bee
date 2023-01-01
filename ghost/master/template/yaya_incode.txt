@@ -1,0 +1,12 @@
+sys.fnc.geturl
+{
+	_key = _argv[0]
+	case _key {
+	when 'diarypost' {
+		'http://nikolat.starfree.jp/beefriends/update.php'
+	}
+	others {
+		'error'
+	}
+	}
+}

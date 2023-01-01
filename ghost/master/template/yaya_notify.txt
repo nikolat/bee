@@ -1,0 +1,86 @@
+//******************************************************************************
+// initializing global variable
+//******************************************************************************
+OnSystemLoad.NOTIFY.EVENT
+{
+	sakura.name           = ''
+	ghostexlist           = IARRAY
+	ghostexcount          = 0
+	installedghostlist    = IARRAY
+	installedheadlinelist = IARRAY
+	installedplugin_name  = IARRAY
+	installedplugin_id    = IARRAY
+	tmp.var.nickname      = ''
+	tmp.var.sex           = ''
+}
+OnSystemUnload.NOTIFY.EVENT
+{
+	ERASEVAR('sakura.name')
+	ERASEVAR('ghostexlist')
+	ERASEVAR('ghostexcount')
+	ERASEVAR('installedghostlist')
+	ERASEVAR('installedheadlinelist')
+	ERASEVAR('installedplugin_name')
+	ERASEVAR('installedplugin_id')
+	ERASEVAR('tmp.var.nickname')
+	ERASEVAR('tmp.var.sex')
+}
+OnCacheSuspend
+{
+	OnSystemUnload.GET.EVENT()
+}
+OnCacheRestore
+{
+	OnSystemLoad.GET.EVENT()
+}
+
+//******************************************************************************
+// self info
+//******************************************************************************
+OnNotifySelfInfo : void
+{
+	sakura.name = reference[1]
+}
+
+//******************************************************************************
+// user info
+//******************************************************************************
+OnNotifyUserInfo : void
+{
+	tmp.var.nickname = reference[0]
+//	tmp.var.fullname = reference[1]
+//	tmp.var.birthday = reference[2]
+	tmp.var.sex      = reference[3]
+}
+
+//******************************************************************************
+// other ghost booting info
+//******************************************************************************
+On_otherghostname : void
+{
+	ghostexlist  = IARRAY
+	foreach reference; _ref { ghostexlist ,= _ref[0,CHR(0x1)] }
+	if sender == 'crow' { ghostexlist[ASEARCH(sakura.name,ghostexlist)] = IARRAY }
+	ghostexcount = ARRAYSIZE(ghostexlist)
+}
+
+//******************************************************************************
+// installed headline info
+//******************************************************************************
+On_installedheadlinename : void
+{
+	installedheadlinelist = reference
+}
+
+//******************************************************************************
+// installed plugin info
+//******************************************************************************
+On_installedplugin : void
+{
+	installedplugin_name = IARRAY
+	installedplugin_id   = IARRAY
+	foreach reference; _ref {
+		installedplugin_name ,= _ref[0,CHR(0x1)]
+		installedplugin_id   ,= _ref[1,CHR(0x1)]
+	}
+}

@@ -1,0 +1,36 @@
+charset,UTF-8
+version,1
+
+group,__disabled
+{
+	100,__parts
+	101,__parts
+	102,__parts
+	800,__parts
+	801,__parts
+	802,__parts
+	803,__parts
+	804,__parts
+}
+
+group,びー
+{
+	scope,0
+
+	0,素
+	1,照れ
+	2,驚き
+	3,不安
+	4,落ち込み
+	5,微笑み
+	6,目閉じ
+	7,怒り
+	8,冷笑
+	9,照れ怒り
+}
+
+group,none
+{
+	10,無し
+}
+

@@ -1,0 +1,292 @@
+///////// YAYA　ゴーストテンプレート
+///////// メニュー処理辞書
+//******************************************************************************
+//起動・終了初期化
+//******************************************************************************
+
+OnSystemLoad.AYATEMPLATE
+{
+	AYATEMPLATE.installedplugin_name = IARRAY
+	AYATEMPLATE.installedplugin_id = IARRAY
+	AYATEMPLATE.stroke = IARRAY
+	AYATEMPLATE.strokeid = IARRAY
+	AYATEMPLATE.stroketimer = IARRAY
+	AYATEMPLATE.mikireflag = 0
+	AYATEMPLATE.LastTalk = ''
+}
+
+OnSystemUnload.AYATEMPLATE
+{
+	//ERASEVAR('AYATEMPLATE.installedplugin_name')
+	//ERASEVAR('AYATEMPLATE.installedplugin_id')
+	ERASEVAR('AYATEMPLATE.stroke')
+	ERASEVAR('AYATEMPLATE.strokeid')
+	ERASEVAR('AYATEMPLATE.stroketimer')
+	ERASEVAR('AYATEMPLATE.mikireflag')
+	ERASEVAR('AYATEMPLATE.LastTalk')
+}
+
+//******************************************************************************
+//ランダムトーク
+//******************************************************************************
+
+OnAITalk
+{
+	OnAiTalk
+}
+
+//------------------------------------------------------------------------------
+//OnAiTalkイベント
+//------------------------------------------------------------------------------
+OnAiTalk
+{
+	//---- 通常のランダムトーク、ただしチェイン中はチェイントーク
+	if SHIORI3FW.IsChain {
+		AYATEMPLATE.LastTalk = ChainTalk
+	}
+	else {
+		AYATEMPLATE.LastTalk = RandomTalk
+	}
+	AYATEMPLATE.LastTalk
+}
+
+
+//******************************************************************************
+//メニュー関係
+//******************************************************************************
+//------------------------------------------------------------------------------
+//メニュー横1行反転
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+//通常メニュー
+AYATEMPLATE.MenuItem
+{
+	_linefeed = 100
+	_n = _argc
+	if _n >= 3 {
+		if GETTYPE(_argv[_n-1]) == 1 { //整数
+			_linefeed = _argv[_n-1]
+			_n -= 1
+		}
+	}
+
+	_lftext = ''
+	while _linefeed > 0 {
+		if _linefeed >= 100 {
+			_lftext += '\n'
+		}
+		else {
+			_lftext += '\n[half]'
+		}
+		_linefeed -= 100
+	}
+	
+	_lftext
+	--
+	sys.fnc.marker()
+	--
+	if basewarenameex == 'SSP' {
+		'\__q['
+		--
+		_s = ''
+		for _i = 1 ; _i < _n-1 ; _i++ {
+			_s += AYATEMPLATE.EscapeText(_argv[_i]) + ','
+		}
+		_s += AYATEMPLATE.EscapeText(_argv[_n-1])
+		_s
+		--
+		']'
+		--
+		_r = AYATEMPLATE.MakeJustText(_argv[0],46)
+		if RE_SEARCH(_r,'["\[\]]') >= 0 {
+			REPLACE(_r,'"','""')
+		} else {
+			_r
+		}
+		--
+		'\__q'
+	} else {
+		'\q['
+		--
+		AYATEMPLATE.MakeJustText(_argv[0],46)
+		--
+		_s = ''
+		if sender == 'crow' {
+			for _i = 1; _i < _n; _i++ {
+				_s += ',' + _argv[_i]
+			}
+		} else {
+			_s += ',' + AYATEMPLATE.EscapeText(_argv[1])
+			for _i = 2; _i < _n; _i++ {
+				_s += CHR(0x1) + AYATEMPLATE.EscapeText(_argv[_i])
+			}
+		}
+		_s
+		--
+		']'
+	}
+}
+
+sys.fnc.marker
+{
+	if (sender == 'embryo') || (basewarenameex == 'SSP') {
+		'\![*]'
+	} else {
+		'☆'
+	}
+}
+
+//------------------------------------------------------------------------------
+//エスケープ
+AYATEMPLATE.EscapeText
+{
+	_r = _argv[0]
+	if RE_SEARCH(_r,'["\[\]]') {
+		'"' + REPLACE(_r,'"','""') + '"'
+	}
+	else {
+		_r
+	}
+}
+AYATEMPLATE.EscapeTextEx
+{
+	_r = _argv[0]
+	if RE_SEARCH(_r,'["\[\]\\]') {
+		'"' + REPLACE(_r,'"','""') + '"'
+	}
+	else {
+		_r
+	}
+}
+
+//------------------------------------------------------------------------------
+//後ろにスペースを補完する関数
+AYATEMPLATE.MakeLongText
+{
+	_menuitem = _argv[0]
+	_len = _argv[1] - GETSTRBYTES(_menuitem,127)
+
+	if _len <= 0 {
+		_menuitem
+		return
+	}
+	
+	_space = '　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　'
+	_menuitem += SUBSTR(_space,0,_len / 2)
+	
+	if _len % 2 > 0 {
+		_menuitem += " "
+	}
+	_menuitem
+}
+
+//------------------------------------------------------------------------------
+//適当な長さで切る
+AYATEMPLATE.MakeShortText
+{
+	if _argc < 2 {
+		'';
+		return;
+	}
+	
+	_num = _argv[1] / 2
+	_len = STRLEN(_argv[0])
+	_text = ''
+	
+	if _num >= _len {
+		_argv[0]
+		return;
+	}
+	
+	_lendiff = 0
+	while 1 {
+		_text = SUBSTR(_argv[0],0,_num)
+		
+		_lendiff = GETSTRBYTES(_text,127) - _argv[1] + 1
+		if _lendiff >= 0 {
+			break;
+		}
+		_num += 1
+		if _num >= _len {
+			break;
+		}
+	}
+	
+	if _num >= _len {
+		_argv[0]
+	}
+	else {
+		_text = SUBSTR(_argv[0],0,_num - 1)
+		if _lendiff > 0 {
+			_text += '..'
+		}
+		else {
+			_text += '...'
+		}
+		_text;
+	}
+}
+
+//------------------------------------------------------------------------------
+//長さをきっちり調節
+AYATEMPLATE.MakeJustText
+{
+	_text = AYATEMPLATE.MakeLongText(_argv[0],_argv[1])
+	if _text != _argv[0] {
+		_text
+		return
+	}
+	
+	_text = AYATEMPLATE.MakeShortText(_argv[0],_argv[1])
+	_text
+}
+
+//******************************************************************************
+//マウスイベントコア
+//******************************************************************************
+AYATEMPLATE.MouseEventExec
+{
+	_fname = _argv[0] + TOSTR(reference[3]) + TOSTR(reference[4])
+	if ISFUNC(_fname) {
+		EVAL(_fname)
+		return
+	}
+	
+	_fname = _argv[0] + TOSTR(reference[3])
+	if ISFUNC(_fname) {
+		EVAL(_fname)
+		return
+	}
+}
+
+AYATEMPLATE.MouseMoveWheelFunc
+{
+	_side = TOINT(reference[3])
+	if _argv[0] {
+		_side += 10
+	}
+	
+	if AYATEMPLATE.strokeid[_side] == reference[4] {
+		if (GETTICKCOUNT - TOINT(AYATEMPLATE.stroketimer[_side])) > 1500 {
+			AYATEMPLATE.stroke[_side] = 1
+		}
+		AYATEMPLATE.stroketimer[_side] = GETTICKCOUNT
+		
+		_stroke = TOINT(AYATEMPLATE.stroke[_side])
+		_stroke += 1
+		AYATEMPLATE.stroke[_side] = _stroke
+		
+		if _stroke >= _argv[1] {
+			if 'talking' !_in_ status {
+				AYATEMPLATE.MouseEventExec(_argv[2]);
+				AYATEMPLATE.stroke[_side] = 1
+			}
+		}
+	}
+	else {
+		AYATEMPLATE.stroke[_side] = 1
+		AYATEMPLATE.stroketimer[_side] = GETTICKCOUNT
+		AYATEMPLATE.strokeid[_side] = reference[4]
+	}
+}

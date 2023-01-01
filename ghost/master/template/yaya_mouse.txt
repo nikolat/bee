@@ -1,0 +1,172 @@
+//******************************************************************************
+// mouse event
+//******************************************************************************
+OnMouseMove
+{
+	AYATEMPLATE.MouseMoveWheelFunc(0,50,'MouseMove')
+}
+OnMouseDoubleClick
+{
+	AYATEMPLATE.MouseEventExec('MouseDoubleClick');
+}
+OnMouseWheel
+{
+	if (reference[2] > 0) && (aitalkinterval < 360) {
+		aitalkinterval += 10
+	} elseif (reference[2] < 0) && (aitalkinterval > 0) {
+		aitalkinterval -= 10
+	} else {
+		return
+	}
+	_ret = '\_l[90,20]喋り間隔：\_l[150,]' + sys.fnc.FillSpace(aitalkinterval) + '\_l[170,]秒'
+	if aitalkinterval == 0 {
+		_ret += ' \f[color,255,0,0]沈黙\f[color,default]'
+	}
+	_ret += '\_l[35,35]0 '
+	for _i = 1; _i < 36; _i++ {
+		_x = _i * 5 + 45
+		_ret += "\_l[%(_x),]―"
+	}
+	_ret += ' 360'
+	_x = aitalkinterval / 2 + 45
+	_ret += "\_l[%(_x),35]｜"
+	'\C\c\0\s[0]\_q' + _ret + '\_q\e'
+}
+sys.fnc.FillSpace
+{
+	_ret = ''
+	if _argv[0] < 10 {
+		_ret += '  '
+	} elseif _argv[0] < 100 {
+		_ret += ' '
+	}
+	_ret + _argv[0]
+}
+//******************************************************************************
+// reaction
+//******************************************************************************
+MouseMove0Head : nonoverlap
+{
+	dialyexp ,= 'MouseMove_Head'
+	'\0\s[1]えへ。'
+	'\0\s[1]……ありがとうございます。'
+	'\0\s[1]私、\_w[500]もっとこうしていたい……。'
+	'\0\s[5]わ、私、褒められるようなことしました？'
+	'\0\s[5]べ、別に落ち込んでなんかいませんよ？'
+	'\0\s[6]ん……。'
+	'\0\s[6]気持ちが、\_w[500]安らいでいきます……。'
+	"\0\s[1]%(username)は、\_w[500]優しい人ですね……。"
+	"\0\s[5]な、\_w[500]何か%(username)のお役に立てたのでしょうか……。"
+	--
+	if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+		'\![raise,OnMakeScreenshotFile]\e'
+	} else {
+		'\e'
+	}
+}
+MouseMove0Face : nonoverlap
+{
+	'\0\s[2]な、何か付いていましたか？'
+	'\0\s[1]や、やめてくださいよ～。'
+	'\0\s[9]くすぐったいです。'
+	'\0\s[0]……？'
+	--
+	'\e'
+}
+MouseMove0Bust
+{
+	dialyexp ,= 'MouseMove_Bust'
+	if tmp.var.sex == 'female' {
+		MouseMove0BustFemale()
+	} else {
+		MouseMove0BustMale()
+	}
+}
+MouseMove0BustMale : nonoverlap
+{
+	'\0\s[7]他の方にもこんなことなさってるんですか？'
+	'\0\s[9]怒らないうちにやめてください。'
+	'\0\s[9]何を確認しているんですか？'
+	'\0\s[9]……何かお探しですか？'
+	--
+	//if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+	//	'\![raise,OnMakeScreenshotFile]\e'
+	//} else {
+		'\e'
+	//}
+}
+MouseMove0BustFemale : nonoverlap
+{
+	'\0\s[2]ど、どうかしましたか？'
+	'\0\s[1]は、恥ずかしいですよ～。'
+	'\0\s[3]私もいつか、大きくなるんでしょうか…？'
+	'\0\s[1]何するんですか、もう…。'
+	--
+	if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+		'\![raise,OnMakeScreenshotFile]\e'
+	} else {
+		'\e'
+	}
+}
+MouseDoubleClick0Head : nonoverlap
+{
+	dialyexp ,= 'MouseDoubleClick_Head'
+	'\0\s[4]痛い……。'
+	'\0\s[4]……！'
+	'\0\s[3]私、何か気に障ることしました……？'
+	'\0\s[3]……？？\_w[500]\n\s[4]ごめんなさい……。'
+	--
+	//if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+	//	'\![raise,OnMakeScreenshotFile]\e'
+	//} else {
+		'\e'
+	//}
+}
+MouseDoubleClick0Face : nonoverlap
+{
+	'\0\s[9]つんつんしないでください。'
+	'\0\s[4]顔はダメですよ～。'
+	'\0\s[4]何をなさるんですか～。'
+	'\0\s[3]あぶないからやめてください～。'
+	--
+	'\e'
+}
+MouseDoubleClick0Bust
+{
+	dialyexp ,= 'MouseDoubleClick_Bust'
+	if tmp.var.sex == 'female' {
+		MouseDoubleClick0BustFemale()
+	} else {
+		MouseDoubleClick0BustMale()
+	}
+}
+MouseDoubleClick0BustMale : nonoverlap
+{
+	'\0\s[3]い、いや！'
+	'\0\s[7]な、何をなさるんですか……？'
+	'\0\s[9]やめてください。'
+	"\0\s[4]%(username)……。"
+	--
+	//if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+	//	'\![raise,OnMakeScreenshotFile]\e'
+	//} else {
+		'\e'
+	//}
+}
+MouseDoubleClick0BustFemale : nonoverlap
+{
+	'\0\s[2]何のおまじないですか？'
+	'\0\s[3]やっぱり、大きほうがいいんでしょうか…。'
+	'\0\s[5]心は、ここに宿るそうです。'
+	'\0\s[1]な、何も隠してないですよ…？'
+	--
+	if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+		'\![raise,OnMakeScreenshotFile]\e'
+	} else {
+		'\e'
+	}
+}
+MouseDoubleClick0
+{
+	sys.fnc.OpenMenu()
+}

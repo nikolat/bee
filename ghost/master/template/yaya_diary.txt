@@ -1,0 +1,182 @@
+//******************************************************************************
+// write diary
+//******************************************************************************
+sys.fnc.WriteDialy
+{
+	_ret     = ''
+	_comment = diary_top()
+	_todayW  = "%(sys.fnc.Fill0(month()))%(sys.fnc.Fill0(day()))"
+	_todayN  = 10000 * year() + 100 * month() + day()
+	if sys.fnc.IsFirstDiaryOfSpecialDay() {
+		flg.LastDialy = _todayN
+		_comment += EVAL("diary_%(_todayW)")
+	} elseif sys.fnc.IsFirstDiaryOfBirthDay() {
+		flg.LastBirthDay = _todayN
+		_comment += diary_birthday()
+	} else {
+		_tmp = dialyexp[RAND(ARRAYSIZE(dialyexp))]
+		if ISVAR('dialyexpss') {
+			_tmp = dialyexpss
+		}
+		_exp = SPLIT(_tmp,'_')
+		case _exp[0] {
+		when 'KanadeTeaTime' {
+			_comment += diary_KanadeTeaTime(_exp[1], _exp[2])
+		}
+		when 'MouseMove' {
+			_comment += EVAL("diary_MouseMove_%(_exp[1])")
+		}
+		when 'MouseDoubleClick' {
+			_comment += EVAL("diary_MouseDoubleClick_%(_exp[1])")
+		}
+		when 'GhostChanging' {
+			_comment += diary_GhostChanging(sys.fnc.KeisyouCutter(_exp[1]))
+		}
+		when 'GhostChanged' {
+			_comment += diary_GhostChanged(sys.fnc.KeisyouCutter(_exp[1]))
+		}
+		when 'GhostCalled' {
+			_comment += diary_GhostCalled(sys.fnc.KeisyouCutter(_exp[1]))
+		}
+		when 'OtherGhostBooted' {
+			_comment += diary_GhostBooted(sys.fnc.KeisyouCutter(_exp[1]))
+		}
+		when 'OtherGhostClosed' {
+			_comment += diary_GhostClosed(sys.fnc.KeisyouCutter(_exp[1]))
+		}
+		}
+	}
+	_filename = 'tmp.txt'
+	_url = sys.fnc.geturl('diarypost')
+	if ISVAR('dialyexpss') {
+		_filename = 'screenshot\screen.png'
+		FCHARSET('binary')
+		if !FOPEN(_filename, 'rb') {
+			return
+		}
+		_base64 = FREADENCODE(_filename, 0, 'base64')
+		FCLOSE(_filename)
+		if (_base64 == -1) || (_base64 == '') {
+			return
+		}
+		_ret += "\![execute,http-post/
+			,%(_url)/
+			,--async=dummy/
+			,--param-charset=UTF-8/
+			,--file=%(_filename)/
+			,--content-type=multipart/form-data/
+			,--param=source=beefriends,--param=status=%(_comment),--param=ss=%(_base64)]"
+		ERASEVAR('dialyexpss')
+		void FDEL('screenshot\screen.png')
+		void FDEL('var\screen.png')
+		void FDEL('var\thumbnail.png')
+	}
+	else {
+		_ret += "\![execute,http-post/
+			,%(_url)/
+			,--async=dummy/
+			,--param-charset=UTF-8/
+			,--file=%(_filename)/
+			,--content-type=multipart/form-data/
+			,--param=source=beefriends/
+			,--param=status=%(_comment)/
+		]"
+	}
+	_ret
+}
+sys.fnc.KeisyouCutter
+{
+	RE_REPLACE(_argv[0],'(さん|くん|ちゃん|様|さま|殿)$','')
+}
+sys.fnc.Fill0
+{
+	_ret = ''
+	if _argv[0] < 10 {
+		_ret += '0'
+	}
+	_ret + TOSTR(_argv[0])
+}
+sys.fnc.IsFirstDiaryOfSpecialDay
+{
+	_todayW  = "%(sys.fnc.Fill0(month()))%(sys.fnc.Fill0(day()))"
+	_todayN  = 10000 * year() + 100 * month() + day()
+	ISFUNC("diary_%(_todayW)") && (flg.LastDialy != _todayN)
+}
+sys.fnc.IsFirstDiaryOfBirthDay
+{
+	_todayN  = 10000 * year() + 100 * month() + day()
+	_isbirthday = (BirthDay[1] == month()) && (BirthDay[2] == day())
+	_isbirthday && (flg.LastBirthDay != _todayN)
+}
+sys.fnc.IsFirstBootOfSpecialDay
+{
+	_todayN  = 10000 * year() + 100 * month() + day()
+	flg.LastBoot != _todayN
+}
+//******************************************************************************
+// Screenshot
+//******************************************************************************
+OnMakeScreenshotFile
+{
+	'\C' + sys.fnc.makescreenshotfile()
+}
+sys.fnc.makescreenshotfile
+{
+	if DialyFlag != 1 {
+		return
+	}
+	if ISVAR('dialyexpss') {
+		return
+	}
+	void MKDIR('var')
+	_bmppath = 'var\screen.bmp'
+	_pngpath = 'screenshot\screen.png'
+	_thumbnail = 'var\thumbnail.png'
+	if SAORI('saori/screenshot.dll', '..\' + _bmppath) != 'OK' {
+		return
+	}
+	sys.fnc.SetShellResize('..\' + _bmppath, '..\' + _pngpath, 600, -1)
+	sys.fnc.SetShellResize('..\' + _bmppath, '..\' + _thumbnail, 250, -1)
+	void FDEL(_bmppath)
+	_icon = 'info'
+	_title = 'びーの絵日記'
+	_text = 'びーが絵日記を描いています'
+	"\![set,trayballoon,--icon=%(_icon),--timeout=30,--title=%(_title),--text=%(_text)]\e"
+}
+sys.tbc.びーの絵日記
+{
+	_path = GETSETTING('coreinfo.path') + 'var\thumbnail.png'
+	_ret  = "\_b[%(_path),centerx,centery]"
+	_ret += AYATEMPLATE.MenuItem('画像ファイルを開く'       ,'OpenScreenshotFile'   , 0)
+	_ret += AYATEMPLATE.MenuItem('画像のあるフォルダを開く' ,'OpenScreenshotFolder' , 100)
+	_ret += AYATEMPLATE.MenuItem('Web日記に投稿を許可する'  ,'AgreeToSendScreenshot', 100)
+	_ret += AYATEMPLATE.MenuItem('閉じる(投稿を許可しない)', 'Menu_CANCEL', 150)
+	_ret += '\_l[0,280]* 問題のある部分を塗りつぶすなど編集可能です *'
+	'\![set,balloontimeout,0]\![set,choicetimeout,0]\0\b[2]\_q' + _ret + '\_q\e'
+}
+sys.cs.OpenScreenshotFile
+{
+	_filepath = 'screenshot\screen.png'
+	"\C\![set,balloontimeout,0]\![set,choicetimeout,0]\![open,file,%(_filepath)]\_l[0,0] \e"
+}
+sys.cs.OpenScreenshotFolder
+{
+	_folderpath = 'screenshot\\'
+	"\C\![set,balloontimeout,0]\![set,choicetimeout,0]\![open,file,%(_folderpath)]\_l[0,0] \e"
+}
+sys.cs.AgreeToSendScreenshot
+{
+	dialyexpss = dialyexp[ARRAYSIZE(dialyexp) - 1]
+	_ret = '/
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
+		びーが終了するときに、ネットワークを介して\n/
+		\_a[http://twitter.com/]Twitter\_aに\n/
+		この画像を送信します。\n/
+		送信されると都合の悪いものを含む場合は、\n/
+		日記の投稿をOFFにしてください。\n/
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
+	'
+	_ret += AYATEMPLATE.MenuItem('メニューへ', 'Menu_EditDiary')
+	_ret += AYATEMPLATE.MenuItem('閉じる',     'Menu_CANCEL')
+	'\0\s[0]\_q' + _ret + '\_q\e'
+}

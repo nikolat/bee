@@ -1,0 +1,107 @@
+//******************************************************************************
+// dressup event
+//******************************************************************************
+OnDressupChanged
+{
+	_pectoral = reference[1]
+	_ret      = ''
+	if ASEARCH('きゅーぴっど',installedghostlist) >= 0 {
+		_ret += sys.fnc.ChangeCupidColor(_pectoral)
+	}
+	if ASEARCH('スタンプ帳',installedplugin_name) >= 0 {
+		_ret += '\_w[3000]' + sys.fnc.Stamp(_pectoral)
+	}
+	_ret + '\e'
+}
+sys.fnc.ChangeCupidColor
+{
+	_pectoral = _argv[0]
+	_ret      = ''
+	_p        = sys.fnc.GetPectoralColor(_pectoral)
+	_lx       = 30
+	_ly       = 25
+	_path     = IARRAY()
+	_path    ,= (_path,'../../../../cupid/shell/master/surface0000.png')
+	_path    ,= (_path,'../../../../cupid/shell/master/surface1001.png')
+	_path    ,= (_path,'../../../../cupid/shell/master/surface1002.png')
+	_s        = sys.fnc.GetShellColor(_path[0],_lx,_ly)
+	foreach _path; _t { sys.fnc.SetShellColor(_t,_s,_p) }
+	if ASEARCH('きゅーぴっど',ghostexlist) >= 0 {
+		_ret += sys.fnc.SendShellReload('きゅーぴっど')
+	}
+	_ret
+}
+sys.fnc.GetPectoralColor
+{
+	case _argv[0] {
+	when '紫' { 0x1d3749 }
+	when '青' { 0xe4959a }
+	when '緑' { 0x85dd9e }
+	when '黄' { 0x81d4ef }
+	when '赤' { 0xa383f8 }
+	others    { 'error' }
+	}
+}
+sys.fnc.GetShellColor
+{
+	_i   = SAORI('saori/imgctl_saori.dll','ToDIB',_argv[0])
+	_ret = SAORI('saori/imgctl_saori.dll','PixelDIB',_i,_argv[1],_argv[2])
+	void SAORI('saori/imgctl_saori.dll','DeleteDIB',_i)
+	_ret
+}
+sys.fnc.SetShellColor
+{
+	_i = SAORI('saori/imgctl_saori.dll','ToDIB',_argv[0])
+	void SAORI('saori/imgctl_saori.dll','RepaintDIB',_i,_argv[1],_argv[2])
+	void SAORI('saori/imgctl_saori.dll','DIBtoPNG',_argv[0],_i,'0')
+	void SAORI('saori/imgctl_saori.dll','DeleteDIB',_i)
+}
+sys.fnc.SendShellReload
+{
+	"\![raiseother,%(_argv[0]),OnCommunicate,0,0,ECHO/1.0,\![reload\,shell\]]\b[-1]"
+}
+sys.fnc.Stamp
+{
+	_pectoral = _argv[0]
+	sys.fnc.GetStampProperty(_pectoral,&_p1,&_comment)
+	_p2       = '../var/stamp.png'
+	void MKDIR('var')
+	sys.fnc.SetShellResize(_p1,_p2,32,32)
+	_p3       = 'ghost/master/var/stamp.png'
+	_title    = 'びースタンプ'
+	"\![raiseplugin,スタンプ帳,OnStampAdd,%(_p3),%(_title),%(_comment)]"
+}
+sys.fnc.GetStampProperty
+{
+	_pectoral = _argv[0]
+	case _pectoral {
+	when '紫' {
+		_argv[1] = '../../../shell/master/surface800.png'
+		_argv[2] = "%(username)に愛を。<br>全てを包み込む宇宙のように。"
+	}
+	when '青' {
+		_argv[1] = '../../../shell/master/surface801.png'
+		_argv[2] = "%(username)に祝福を。<br>大地を潤す雨のように。"
+	}
+	when '緑' {
+		_argv[1] = '../../../shell/master/surface802.png'
+		_argv[2] = "%(username)にやすらぎを。<br>静かなる大地のように。"
+	}
+	when '黄' {
+		_argv[1] = '../../../shell/master/surface803.png'
+		_argv[2] = "%(username)に希望を。<br>自由な風のように。"
+	}
+	when '赤' {
+		_argv[1] = '../../../shell/master/surface804.png'
+		_argv[2] = "%(username)に勇気を。<br>燃え盛る炎のように。"
+	}
+	others { 'error' }
+	}
+}
+sys.fnc.SetShellResize
+{
+	_i = SAORI('saori/imgctl_saori.dll','ToDIB',_argv[0])
+	void SAORI('saori/imgctl_saori.dll','ResizeDIB',_i,_argv[2],_argv[3])
+	void SAORI('saori/imgctl_saori.dll','DIBtoPNG',_argv[1],_i,0)
+	void SAORI('saori/imgctl_saori.dll','DeleteDIB',_i)
+}

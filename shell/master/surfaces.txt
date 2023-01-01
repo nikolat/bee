@@ -1,0 +1,242 @@
+charset,UTF-8
+
+descript
+{
+version,1
+maxwidth,155
+}
+
+surface0
+{
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+// 瞬きアニメーション定義
+animation10.interval,sometimes
+animation10.pattern0,overlay,-1,50,0,0
+animation10.pattern1,overlay,100,50,50,60
+animation10.pattern2,overlay,101,50,50,60
+animation10.pattern3,overlay,-1,50,0,0
+}
+
+surface1
+{
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+}
+
+surface2
+{
+// element合成定義
+element0,base,surface000.png,0,0
+element1,overlay,element002.png,70,80
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+// 瞬きアニメーション定義
+animation10.interval,sometimes
+animation10.pattern0,overlay,-1,50,0,0
+animation10.pattern1,overlay,100,50,50,60
+animation10.pattern2,overlay,101,50,50,60
+animation10.pattern3,overlay,-1,50,0,0
+}
+
+surface3
+{
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+// 瞬きアニメーション定義
+animation10.interval,sometimes
+animation10.pattern0,overlay,-1,50,0,0
+animation10.pattern1,overlay,102,50,50,60
+animation10.pattern2,overlay,-1,50,0,0
+}
+
+surface4
+{
+// element合成定義
+element0,base,surface003.png,0,0
+element1,overlay,surface102.png,50,60
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+}
+
+surface5
+{
+// element合成定義
+element0,base,surface000.png,0,0
+element1,overlay,element005.png,50,60
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+}
+
+surface6
+{
+// element合成定義
+element0,base,surface000.png,0,0
+element1,overlay,surface100.png,50,60
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+}
+
+surface7
+{
+// element合成定義
+element0,base,surface000.png,0,0
+element1,overlay,element007.png,50,50
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+// 瞬きアニメーション定義
+animation10.interval,sometimes
+animation10.pattern0,overlay,-1,50,0,0
+animation10.pattern1,overlay,100,50,50,60
+animation10.pattern2,overlay,-1,50,0,0
+}
+
+surface8
+{
+// element合成定義
+element0,base,surface000.png,0,0
+element1,overlay,element008.png,50,50
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+// 瞬きアニメーション定義
+animation10.interval,sometimes
+animation10.pattern0,overlay,-1,50,0,0
+animation10.pattern1,overlay,100,50,50,60
+animation10.pattern2,overlay,-1,50,0,0
+}
+
+surface9
+{
+// element合成定義
+element0,base,surface000.png,0,0
+element1,overlay,element009.png,50,50
+// 当たり判定定義
+collision0,51,2,106,35,Head
+collision1,63,60,90,83,Face
+collision2,60,105,95,140,Bust
+// 着せ替え定義
+animation0.interval,bind
+animation0.pattern0,add,800,0,73,96
+animation1.interval,bind
+animation1.pattern0,add,801,0,73,96
+animation2.interval,bind
+animation2.pattern0,add,802,0,73,96
+animation3.interval,bind
+animation3.pattern0,add,803,0,73,96
+animation4.interval,bind
+animation4.pattern0,add,804,0,73,96
+}

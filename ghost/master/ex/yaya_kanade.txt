@@ -1,0 +1,113 @@
+//******************************************************************************
+//奏でる日常の音色 - お茶会 対応辞書
+//******************************************************************************
+#define TEA_PARTY_CHARACTER_NAME 'びー'
+#define TEA_PARTY_VERSION 1
+
+//Reference0:「奏でる日常の音色」のお茶会バージョン番号
+//Reference1:返信イベントの送信先ゴースト（「かなで」に固定）
+//Reference2:返信イベント名
+OnKanadeTeaPartyInfomationRequest
+{
+	_client_version = TEA_PARTY_VERSION
+	_server_version = reference[0]
+	_send_to = reference[1]
+	_send_event = reference[2]
+	_sakura_name = TEA_PARTY_CHARACTER_NAME
+	_response = ''
+	if _server_version <= _client_version {
+		_response = '対応'
+	}
+	else {
+		_response = '非対応'
+	}
+	"\![raiseother,%(_send_to),%(_send_event),%(_client_version),%(_sakura_name),%(_response)]\e"
+}
+
+//Reference0:Reference1以降の組み合わせが実装されたお茶会のバージョン
+//Reference1:お飲み物
+//Reference2:お菓子
+//Reference3以降:拡張情報
+OnKanadeTeaParty
+{
+	_client_version = TEA_PARTY_VERSION
+	_server_version = reference[0]
+	_drink = reference[1]
+	_snack = reference[2]
+	if _server_version > _client_version {
+		//とりあえず非対応
+		return
+	}
+	//とりあえず旧仕様互換モード
+	"\![raise,OnKanadeTeaTime,%(_drink),%(_snack)]\e"
+}
+
+//Reference0:お茶会を実行したバージョン
+OnKanadeTeaPartyEnd
+{
+	//終了
+}
+
+//===================
+// 旧仕様
+//===================
+OnKanadeTeaTime
+{
+	if reference[3] == 1 {
+		//移行時用
+		return
+	}
+
+	_drink = reference[0]
+	_snack = reference[1]
+	dialyexp ,= "KanadeTeaTime_%(_drink)_%(_snack)"
+	
+	case _drink {
+	when 'コーヒー' {
+		"\0\s[2]不思議な色の飲み物ですね。\_w[1000]/
+			\n\s[5]では、\_w[500]いただきます。\_w[1000]/
+			\n\s[6]…\_w[500]…\_w[500]\s[3]苦い…。\_w[1000]/
+			\n\s[4]あの、\_w[500]%(username)、\_w[500]これ、\_w[500]残してもいいでしょうか…。"
+	}
+	when '紅茶' {
+		case _snack {
+		when 'レアチーズケーキ','イチゴショート' {
+			"\0\s[2]ケーキ！\_w[1000]\s[1]お腹空かせてきてよかった…。\_w[1000]/
+				\n\s[6]…\_w[500]…\_w[500]\s[5]甘くて、\_w[500]おいしい！\_w[1000]/
+				\n\s[6]ごちそうさまでした。\_w[1000]/
+				\n\s[1]この次もぜひ、\_w[500]ご一緒させてくださいね。"
+		}
+		when 'クリスマスケーキ' {
+			"\0\s[6]天にまします我らの父よ、、、\_w[1000]/
+				\n\s[2]…\_w[500]…\_w[500]あと何だっけ？\_w[1000]/
+				\n\s[5]とにかく、\_w[500]いただきまーす！\_w[1000]/
+				\n\s[6]…\_w[1000]\s[5]美味しい！\_w[1000]\s[1]幸せ…。"
+		}
+		others {
+			"\0\s[2]これが噂に聞く%(_snack)ですか…。\_w[1000]/
+				\n\s[6]…\_w[500]…\_w[500]\s[2]不思議な食感ですね。\_w[1000]/
+				\n\s[5]これはお紅茶も美味しく頂けますね。\_w[1000]/
+				\n\s[6]%(_snack)…覚えておきましょう。"
+		}
+		}
+	}
+	when '緑茶' {
+		"\0\s[2]このお菓子初めて見ました。\_w[1000]/
+			\n\s[0]%(_snack)っていうんですか。\_w[1000]/
+			\n\s[6]…\_w[500]…\_w[500]\s[5]おいしい！\_w[1000]/
+			\n\s[1]見た目も可愛いので、\_w[500]食べるのがもったいないですね。"
+	}
+	others {
+		"\0\s[2]%(_drink)…？\_w[500]不思議な香りがしますね。\_w[1000]/
+			\n\s[0]では、\_w[500]少しだけ…。\_w[1000]/
+			\n\s[6]…\_w[500]…\_w[500]\s[3]？？\_w[1000]/
+			\n\s[4]な、\_w[500]何だか体の具合が…。"
+	}
+	}
+	--
+//	if (DialyFlag == 1) && !ISVAR('dialyexpss') {
+//		'\![raise,OnMakeScreenshotFile]\e'
+//	} else {
+		'\e'
+//	}
+}

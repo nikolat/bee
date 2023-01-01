@@ -1,0 +1,204 @@
+//******************************************************************************
+// YAYA　ゴーストテンプレート
+// メニュー処理辞書
+//******************************************************************************
+
+//******************************************************************************
+//メインメニューの展開
+//
+//AYATEMPLATE.MenuItemの使い方
+//1つめの文字列＝選択肢に表示する文字列
+//2つめの文字列＝選んだときに実行される関数名
+//3つめの文字列＝改行する量　50%刻み　省略すると100%（＝\n）
+//******************************************************************************
+
+//------------------------------------------------------------------------------
+//メインメニュー展開
+//------------------------------------------------------------------------------
+sys.fnc.OpenMenu { sys.cs.OpenMenu }
+sys.cs.OpenMenu
+{
+	_ret = ''
+	_ret += sys.fnc.Menu_Talk()
+	_ret += '\_q'
+	_ret += AYATEMPLATE.MenuItem('何か話して' ,'Menu_AITALK',200)
+	_ret += AYATEMPLATE.MenuItem('名前覚えて' ,'Menu_InputUserName')
+	if basewarenameex == 'SSP' {
+		_ret += AYATEMPLATE.MenuItem('誕生日覚えて' ,'Menu_InputBirthDay')
+		_ret += AYATEMPLATE.MenuItem('日記の設定' ,'Menu_EditDiary')
+	}
+	if SHIORI3FW.IsGhostExist('暦にしき') {
+		_ret += AYATEMPLATE.MenuItem('暦にしきに記念日を覚えてもらう' ,'Menu_SendCommunicateToKoyomiNishiki')
+	}
+	_ret += AYATEMPLATE.MenuItem('なんでもない','Menu_CANCEL',150)
+	'\0\s[0]' + _ret + '\_q\e'
+}
+sys.fnc.Menu_Talk
+{
+	'なんでしょうか？'
+	'お呼びですか？'
+	'メニューですね。'
+	"%(username)、どうしました？"
+}
+
+//******************************************************************************
+//各項目の処理内容
+//******************************************************************************
+sys.cs.Menu_AITALK
+{
+	RandomTalk()
+}
+sys.cs.Menu_InputUserName
+{
+	if sender == 'SSP' {
+		"\0\s[0]\_q＊　名前入力　＊\_q\![open,inputbox,UserName,0,%(AYATEMPLATE.EscapeText(tmp.var.nickname))]\e"
+	} else {
+		"\0\s[0]\_q＊　名前入力　＊\_q\![open,inputbox,UserName,0]\e"
+	}
+}
+sys.cs.Menu_InputBirthDay
+{
+	if sender == 'SSP' {
+		"\0\s[0]\_q＊　誕生日入力　＊\_q\![open,dateinputbox,BirthDay,0,%(year()),%(month()),%(day())]\e"
+	}
+}
+sys.input.UserName
+{
+	if reference[1] == '' {
+		'\0\s[0]\_q＊　名前を入力してください　＊\_q'
+		--
+		if sender == 'SSP' {
+			"\![open,inputbox,UserName,0,%(AYATEMPLATE.EscapeText(tmp.var.nickname))]\e"
+		} else {
+			"\![open,inputbox,UserName,0]\e"
+		}
+	} elseif reference[1] == username {
+		"\0\s[0]\_q＊　「%(username)」のまま変更無しです　＊\_q\e"
+	} else {
+		username = SHIORI3FW.EscapeAllTags(reference[1])
+		"\0\s[0]\_q＊　「%(username)」に変更されました　＊\_q\e"
+	}
+}
+sys.input.BirthDay
+{
+	BirthDay = IARRAY()
+	BirthDay ,= TOINT(reference[1][0])
+	BirthDay ,= TOINT(reference[1][1])
+	BirthDay ,= TOINT(reference[1][2])
+	"\0\s[0]\_q＊　「%(BirthDay[1])月%(BirthDay[2])日」に設定されました　＊\_q\e"
+}
+sys.cs.Menu_EditDiary
+{
+	_url_twitter    = 'http://twitter.com/beefriends'
+	_url_ukadon     = 'https://ukadon.shillest.net/@beefriends'
+	//_url_haiku      = 'http://h.hatena.ne.jp/beefriends/'
+	//_url_friendfeed = 'http://friendfeed.com/beefriends'
+	//_url_identica   = 'http://identi.ca/beefriends'
+	_ret = ''
+	if DialyFlag == 1 {
+		_ret += '現在：日記を書く'
+	} else {
+		_ret += '現在：日記を書かない'
+	}
+	_ret += '\n\n[half]\![*]\__q[SetDialyFlag,1]日記を書かせる\__q  /  \![*]\__q[SetDialyFlag,0]日記を書かせない\__q'
+	if ISVAR('dialyexpss') {
+		_ret += AYATEMPLATE.MenuItem('絵日記を消してもらう'     ,'DeletePhotoDialy'     , 150)
+		_ret += AYATEMPLATE.MenuItem('画像ファイルを開く'       ,'OpenScreenshotFile'   , 100)
+		_ret += AYATEMPLATE.MenuItem('画像のあるフォルダを開く' ,'OpenScreenshotFolder' , 100)
+	}
+
+	_ret += '\n[half]'
+	_ret += "\n\![*]\__q[OpenBrowser,%(_url_twitter)]Twitterを覗く\__q"
+	_ret += "\n\![*]\__q[OpenBrowser,%(_url_ukadon)]うかどんを覗く\__q"
+	//_ret += "  \![*]\__q[OpenBrowser,%(_url_haiku)]HatenaHaikuを覗く\__q"
+	//_ret += "\n\![*]\__q[OpenBrowser,%(_url_friendfeed)]FriendFeed を覗く\__q"
+	//_ret += "  \![*]\__q[OpenBrowser,%(_url_identica)]identi.ca  を覗く\__q"
+
+	//_ret += '\n[half]'
+	//if !(ASEARCH('Twitter / beefriends',installedheadlinelist) >= 0) {
+	//	_ret += AYATEMPLATE.MenuItem('TwitterのRSSセンサをインストール','Menu_InstallDiaryRSS')
+	//} else {
+	//	_ret += AYATEMPLATE.MenuItem('Twitterを覗く(RSS)'              ,'Menu_ShowDiaryRSS')
+	//}
+	_ret += AYATEMPLATE.MenuItem('日記の説明'       , 'Menu_AboutDialy', 150)
+	_ret += AYATEMPLATE.MenuItem('戻る'             , 'OpenMenu')
+	'\0\s[0]\_q' + _ret + '\_q\e'
+}
+sys.cs.Menu_AboutDialy
+{
+	_ret = '/
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
+		5分以上起動した後びーが終了するときに、\n/
+		\_a[https://twitter.com/]Twitter\_aや\_a[https://ukadon.shillest.net/]うかどん\_aに\n/
+		今日の出来事を書き込みます。\n/
+		ユーザ名を含む内容となりますので、\n/
+		HNなどを使用するなど、\n/
+		個人情報の扱いにはご注意ください。\n/
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
+	'
+	_ret += AYATEMPLATE.MenuItem('絵日記について', 'Menu_AboutPicture', 0)
+	_ret += AYATEMPLATE.MenuItem('戻る'          , 'Menu_EditDiary'  , 100)
+	'\0\s[0]\_q' + _ret + '\_q\e'
+}
+sys.cs.Menu_AboutPicture
+{
+	_ret = '/
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
+		びーが時々スクリーンショットを作成します。\n/
+		投稿されると問題のあるものが画像に含まれる場合は、\n/
+		投稿を許可しないか、画像編集ソフト等で\n/
+		編集を施して下さい。\n/
+		また、「S」キーを押すことで任意のタイミングで\n/
+		スクリーンショットを作成することができます。\n/
+		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
+	'
+	_ret += AYATEMPLATE.MenuItem('日記の説明'    , 'Menu_AboutDialy', 0)
+	_ret += AYATEMPLATE.MenuItem('戻る'          , 'Menu_EditDiary' , 100)
+	'\0\s[0]\_q' + _ret + '\_q\e'
+}
+sys.csex.SetDialyFlag
+{
+	DialyFlag = reference[0]
+	sys.cs.Menu_EditDiary()
+}
+sys.cs.DeletePhotoDialy
+{
+	ERASEVAR('dialyexpss')
+	void FDEL('screenshot\screen.png')
+	void FDEL('var\screen.png')
+	void FDEL('var\thumbnail.png')
+	_ret = '＊　絵日記を削除しました　＊'
+	_ret += AYATEMPLATE.MenuItem('メニューへ', 'Menu_EditDiary', 150)
+	_ret += AYATEMPLATE.MenuItem('閉じる',     'Menu_CANCEL')
+	'\0\s[0]\_q' + _ret + '\_q\e'
+}
+sys.csex.OpenBrowser
+{
+	"\C\![open,browser,%(reference[0])]\e"
+}
+sys.cs.Menu_InstallDiaryRSS
+{
+	'\![execute,install,url,http://twitter.com/statuses/user_timeline/15035531.rss]'
+}
+sys.cs.Menu_ShowDiaryRSS
+{
+	'\![execute,headline,Twitter / beefriends]'
+}
+sys.cs.Menu_CANCEL
+{
+	if (sender == 'embryo') || (sender == 'crow') {
+		'\0\s[0]\b[-1]\e'
+	} else {
+		'\0\s[0]\e'
+	}
+}
+sys.cs.Menu_SendCommunicateToKoyomiNishiki
+{
+	res_reference[0] = '暦にしき'
+	res_reference[1] = 'JPRadish'
+	res_reference[2] = '対応登録'
+	res_reference[3] = '話'
+	res_reference[4] = '元日,バレンタインデー,七夕,ハロウィン,クリスマス,大晦日'
+
+	"\s[0]暦にしきさん、\_w[500]\s[1]特別な記念日は%(username)と一緒に過ごしたいので、\_w[500]お知らせ頂けますか…？\e"
+}
