@@ -29,5 +29,5 @@ sys.key.r
 }
 On_homeurl
 {
-	'http://home.384.jp/evidence/update/bee/'
+	'https://raw.githubusercontent.com/nikolat/bee/main/'
 }
