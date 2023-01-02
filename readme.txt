@@ -1,49 +1,48 @@
+========================================================================
+【ソフト名称】びーふれんず
+【 制 作 者 】Don
+【 動作環境 】Windows11 22H2 + SSP/2.6.25
+【 タ イ プ 】「伺か」用ゴースト
+【 取扱種別 】フリーウェア
+【 配布月日 】2008/01/26
+【 配 布 元 】https://nikolat.github.io/
+【  備  考  】後述
+========================================================================
+■概要
 
-　ゴースト『びーふれんず』
+  Web上に日記を書くゴーストです。
 
-　作成者　　　　Don
-　一次配布元　　http://home.384.jp/evidence/
+  ゴーストの使い方 - SSP
+    http://keshiki.nobody.jp/
 
-■キャラクタ
+■ライセンス
 
-　Web上に日記とか、書けます。
-　スクリプトの流用・改変・再配布は自由です。
+  以下のモジュールを使用させて頂いております。
+  ありがとうございます。
 
-■動作環境
+  yaya.dll
+    yaya-shiori
+      https://github.com/YAYA-shiori/yaya-shiori
 
-　最新版のSSPでご使用下さい。
-　http://ssp.shillest.net/
+  imgctl.dll
+    ルーチェ's Homepage
+      http://www.ruche-home.net/
 
-　その他materia,CROW,ninix-ayaで動作確認していますが、
-　日記を書く機能はSSP限定になります。
+  imgctl_saori.dll
+    JUNK ROOM
+      http://whiteball.m7.coreserver.jp/
 
-■謝辞
+  screenshot.dll
+    csaori
+      https://github.com/ukatech/csaori
 
-　◆umeici様のSHIORI「AYA」の整備班カスタム版「YAYA」を使わせて頂いております。
-　◇yaya-shiori
-　　https://github.com/ponapalt/yaya-shiori
+  icon.ico
+    fiddle-de-dee
+      http://fiddle-de-dee.sakura.ne.jp/
 
-　◆しらたま様のSAORI「imgctl_saori.dll」および、
-　　ルーチェ様の「imgctl.dll」を使わせて頂いております。
-　◇JUNKROOM
-　　http://whiteball.m7.coreserver.jp/
-　◇ルーチェ's Homepage
-　　https://ruche-home.net/
+  shell
+    魔法小娘
+      http://priest.so.land.to/
 
-　◆Roy様のSAORI「screenshot.dll」を使わせて頂いております。
-　◇csaori
-　　https://github.com/ponapalt/csaori
-
-　◆Wiz★様のフリーアイコンを使わせて頂いております。
-　◇fiddle-de-dee
-　　http://fiddle-de-dee.sakura.ne.jp/
-
-　◆eseluma様の「しりさとり」を参考にさせて頂いております。
-　◇GoodBye Bad/Hello Heaven.
-　　http://eseluma.hp.infoseek.co.jp/
-　＊上記リンク先のサーバは2010/11/01にサービス終了となりました。
-　素晴らしいゴーストが入手不可となったことを残念に思うと共に、
-　eseluma様のご功績に対しあらためて感謝の意を表します。
-
-　ありがとうございます。
-
+  上記以外のテキストファイル、辞書ファイルの類いは、
+  zlib Licenseの下で公開します。
