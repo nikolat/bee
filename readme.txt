@@ -44,5 +44,9 @@
     魔法小娘
       http://priest.so.land.to/
 
+  menu_foreground.png
+  menu_background.png
+    Copyright (c) ゆーぐれな
+
   上記以外のテキストファイル、辞書ファイルの類いは、
   zlib Licenseの下で公開します。
