@@ -17,9 +17,9 @@ file,ghost/master/saori/screenshot_readme.txt85c42445b0b6bedb89d67d070e1c6f54s
 file,ghost/master/screenshot/readme.txt9e50d0feda3ad789d38fbfc1c3e643ffsize=285date=2012-12-21T00:00:00
 file,ghost/master/system/_loading_order.txt0868241bb617c7c18013e2c024d18dd9size=18date=2012-12-21T00:00:00
 file,ghost/master/system/yaya_base/_loading_order.txt9c350c2c9c08f635bff5eaae149af8c8size=103date=2012-12-21T00:00:00
-file,ghost/master/system/yaya_base/config.dicf91d0a485f518049779991ca7476772esize=2648date=2012-12-21T00:00:00
+file,ghost/master/system/yaya_base/config.diced9161a3525e17c9f740e29fe4c131c8size=2921date=2012-12-21T00:00:00
 file,ghost/master/system/yaya_base/optional.dicff4da728a656a8aa6a38939e654c51f2size=9953date=2012-12-21T00:00:00
-file,ghost/master/system/yaya_base/shiori3.dice36a892eca5a12f24278e226a4747c3esize=51627date=2012-12-21T00:00:00
+file,ghost/master/system/yaya_base/shiori3.dic4edb806e32fd171813a9380bd5f04f64size=51771date=2012-12-21T00:00:00
 file,ghost/master/system_config.txt226ea3aa3cfcb1f7fbb56267c2e66378size=678date=2012-12-21T00:00:00
 file,ghost/master/template/yaya_aitalk.txt1f436220d4a312084e7220b6497ecb8dsize=47581date=2012-12-21T00:00:00
 file,ghost/master/template/yaya_bootend.txtaedbe8bb40707cc2f4f275a6d3cd2679size=29043date=2012-12-21T00:00:00
@@ -40,7 +40,7 @@ file,ghost/master/yaya_emerg.txte65295d4b94c64171b8b9d5a90ccc584size=1061date
 file,ghost/master/yaya_emerg_dic.txta4adcbbaeba086c3c6b5ec2eaea27d23size=872date=2012-12-21T00:00:00
 file,install.txtb870b082a6cd52d80dd6cb6da3d1b903size=63date=2012-12-21T00:00:00
 file,license.txt6494735a00f7c1079e1751f79bd8a7c5size=856date=2012-12-21T00:00:00
-file,readme.txtb7294b8ee159c0d2b7526642cf2bb4d8size=1319date=2012-12-21T00:00:00
+file,readme.txt6fc4a9344b032883dda6bcea5508bb47size=1319date=2012-12-21T00:00:00
 file,shell/master/descript.txte5277dc91569b6e983139943f6ea02c3size=1139date=2012-12-21T00:00:00
 file,shell/master/element002.png01b1aaf63c8bcd54ed0d48db987fb51asize=423date=2012-12-21T00:00:00
 file,shell/master/element005.pngd6f0a85ffa14b115c0e6df84953db5casize=1222date=2012-12-21T00:00:00
