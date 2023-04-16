@@ -89,8 +89,9 @@ sys.input.BirthDay
 }
 sys.cs.Menu_EditDiary
 {
-	_url_twitter    = 'http://twitter.com/beefriends'
 	_url_ukadon     = 'https://ukadon.shillest.net/@beefriends'
+	_url_bluesky    = 'https://bskyw.syui.ai/beefriends#github'
+	//_url_twitter    = 'http://twitter.com/beefriends'
 	//_url_haiku      = 'http://h.hatena.ne.jp/beefriends/'
 	//_url_friendfeed = 'http://friendfeed.com/beefriends'
 	//_url_identica   = 'http://identi.ca/beefriends'
@@ -108,8 +109,9 @@ sys.cs.Menu_EditDiary
 	}
 
 	_ret += '\n[half]'
-	_ret += "\n\![*]\__q[OpenBrowser,%(_url_twitter)]Twitterを覗く\__q"
 	_ret += "\n\![*]\__q[OpenBrowser,%(_url_ukadon)]うかどんを覗く\__q"
+	_ret += "\n\![*]\__q[OpenBrowser,%(_url_bluesky)]Blueskyを覗く\__q"
+	//_ret += "\n\![*]\__q[OpenBrowser,%(_url_twitter)]Twitterを覗く\__q"
 	//_ret += "  \![*]\__q[OpenBrowser,%(_url_haiku)]HatenaHaikuを覗く\__q"
 	//_ret += "\n\![*]\__q[OpenBrowser,%(_url_friendfeed)]FriendFeed を覗く\__q"
 	//_ret += "  \![*]\__q[OpenBrowser,%(_url_identica)]identi.ca  を覗く\__q"
@@ -129,7 +131,7 @@ sys.cs.Menu_AboutDialy
 	_ret = '/
 		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
 		5分以上起動した後びーが終了するときに、\n/
-		\_a[https://twitter.com/]Twitter\_aや\_a[https://ukadon.shillest.net/]うかどん\_aに\n/
+		\_a[https://blueskyweb.xyz/]Bluesky\_aや\_a[https://ukadon.shillest.net/]うかどん\_aに\n/
 		今日の出来事を書き込みます。\n/
 		ユーザ名を含む内容となりますので、\n/
 		HNなどを使用するなど、\n/
@@ -176,14 +178,14 @@ sys.csex.OpenBrowser
 {
 	"\C\![open,browser,%(reference[0])]\e"
 }
-sys.cs.Menu_InstallDiaryRSS
-{
-	'\![execute,install,url,http://twitter.com/statuses/user_timeline/15035531.rss]'
-}
-sys.cs.Menu_ShowDiaryRSS
-{
-	'\![execute,headline,Twitter / beefriends]'
-}
+//sys.cs.Menu_InstallDiaryRSS
+//{
+//	'\![execute,install,url,http://twitter.com/statuses/user_timeline/15035531.rss]'
+//}
+//sys.cs.Menu_ShowDiaryRSS
+//{
+//	'\![execute,headline,Twitter / beefriends]'
+//}
 sys.cs.Menu_CANCEL
 {
 	if (sender == 'embryo') || (sender == 'crow') {
