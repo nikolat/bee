@@ -90,7 +90,7 @@ sys.input.BirthDay
 sys.cs.Menu_EditDiary
 {
 	_url_ukadon     = 'https://ukadon.shillest.net/@beefriends'
-	_url_bluesky    = 'https://bskyw.syui.ai/beefriends#github'
+	_url_bluesky    = 'https://bsky.link/feed?user=beefriends.bsky.social'
 	//_url_twitter    = 'http://twitter.com/beefriends'
 	//_url_haiku      = 'http://h.hatena.ne.jp/beefriends/'
 	//_url_friendfeed = 'http://friendfeed.com/beefriends'
