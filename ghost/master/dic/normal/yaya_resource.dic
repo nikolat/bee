@@ -32,6 +32,7 @@ On_sakura.recommendsites
 	"/
 		すくりや%(CHR(1))https://nikolat.github.io/%(CHR(1))-%(CHR(1))%(CHR(2))/
 		びー (@beefriends@ukadon.shillest.net) - うかどん%(CHR(1))https://ukadon.shillest.net/@beefriends%(CHR(1))-%(CHR(1))%(CHR(2))/
+		びー (beefriends@nikolat.github.io) - のぞき窓(Nostr)%(CHR(1))https://relay-jp.nostr.wirednet.jp/index.html?npub18ee7ggjpp4uf77aurecqhtfpz5y0j95pd9hadrdsxt5we3pysnnqe8k224%(CHR(1))-%(CHR(1))%(CHR(2))/
 		beefriends in the Bluesky%(CHR(1))https://bsky.link/feed?user=beefriends.bsky.social%(CHR(1))-%(CHR(1))%(CHR(2))/
 	"
 }

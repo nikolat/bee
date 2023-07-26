@@ -90,6 +90,7 @@ sys.input.BirthDay
 sys.cs.Menu_EditDiary
 {
 	_url_ukadon     = 'https://ukadon.shillest.net/@beefriends'
+	_url_nostr      = 'https://relay-jp.nostr.wirednet.jp/index.html?npub18ee7ggjpp4uf77aurecqhtfpz5y0j95pd9hadrdsxt5we3pysnnqe8k224'
 	_url_bluesky    = 'https://bsky.link/feed?user=beefriends.bsky.social'
 	//_url_twitter    = 'http://twitter.com/beefriends'
 	//_url_haiku      = 'http://h.hatena.ne.jp/beefriends/'
@@ -110,6 +111,7 @@ sys.cs.Menu_EditDiary
 
 	_ret += '\n[half]'
 	_ret += "\n\![*]\__q[OpenBrowser,%(_url_ukadon)]うかどんを覗く\__q"
+	_ret += "\n\![*]\__q[OpenBrowser,%(_url_nostr)]Nostrを覗く\__q"
 	_ret += "\n\![*]\__q[OpenBrowser,%(_url_bluesky)]Blueskyを覗く\__q"
 	//_ret += "\n\![*]\__q[OpenBrowser,%(_url_twitter)]Twitterを覗く\__q"
 	//_ret += "  \![*]\__q[OpenBrowser,%(_url_haiku)]HatenaHaikuを覗く\__q"
@@ -131,7 +133,7 @@ sys.cs.Menu_AboutDialy
 	_ret = '/
 		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
 		5分以上起動した後びーが終了するときに、\n/
-		\_a[https://blueskyweb.xyz/]Bluesky\_aや\_a[https://ukadon.shillest.net/]うかどん\_aに\n/
+		\_a[https://blueskyweb.xyz/]Bluesky\_aや\_a[https://relay-jp.nostr.wirednet.jp/index.html]Nostr\_aや\_a[https://ukadon.shillest.net/]うかどん\_aに\n/
 		今日の出来事を書き込みます。\n/
 		ユーザ名を含む内容となりますので、\n/
 		HNなどを使用するなど、\n/
