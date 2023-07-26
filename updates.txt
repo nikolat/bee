@@ -12,10 +12,10 @@ file,ghost/master/dic/normal/yaya_diary.dic3c2674382b8b2a6b928acb625bda7f8csiz
 file,ghost/master/dic/normal/yaya_dressup.dic63f5ff3940d129d17819a058c3689bdbsize=3310date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_event.dic47f7c16834e018d5cf1da17f4d49b7e5size=16254date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_incode.dic76e437da2445986b956c63639e168d74size=151date=2012-12-21T00:00:00
-file,ghost/master/dic/normal/yaya_menu.dicd47aa2a33eea0559c560e45943d6c039size=7800date=2012-12-21T00:00:00
+file,ghost/master/dic/normal/yaya_menu.dic741fff5dcec5309be5821ecfdc445ee3size=8060date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_mouse.diccae25d2387f14b71bf573a5e0c5504basize=4505date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_notify.dic4ceeead950b4df0fa9f48e8070ef7b5asize=2535date=2012-12-21T00:00:00
-file,ghost/master/dic/normal/yaya_resource.dic2a13b3b8333658067694bd35c3042768size=1851date=2012-12-21T00:00:00
+file,ghost/master/dic/normal/yaya_resource.dic449a8ba4e2032d1cd29a86f04e07a7fcsize=2060date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_tmpl_util.dic3ed81aa7a6de7bbd453d8eaf0de64d5dsize=5980date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_word.dic568e00d4761bcee919343cd7b0e0d7absize=40161date=2012-12-21T00:00:00
 file,ghost/master/dic/system/_loading_order.txt0868241bb617c7c18013e2c024d18dd9size=18date=2012-12-21T00:00:00
