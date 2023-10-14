@@ -58,11 +58,11 @@ MouseMove0Head : nonoverlap
 	"\0\s[1]%(username)は、\_w[500]優しい人ですね……。"
 	"\0\s[5]な、\_w[500]何か%(username)のお役に立てたのでしょうか……。"
 	--
-	if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
-		'\![raise,OnMakeScreenshotFile]\e'
-	} else {
+	//if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+	//	'\![raise,OnMakeScreenshotFile]\e'
+	//} else {
 		'\e'
-	}
+	//}
 }
 MouseMove0Face : nonoverlap
 {
@@ -102,11 +102,11 @@ MouseMove0BustFemale : nonoverlap
 	'\0\s[3]私もいつか、大きくなるんでしょうか…？'
 	'\0\s[1]何するんですか、もう…。'
 	--
-	if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
-		'\![raise,OnMakeScreenshotFile]\e'
-	} else {
+	//if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+	//	'\![raise,OnMakeScreenshotFile]\e'
+	//} else {
 		'\e'
-	}
+	//}
 }
 MouseDoubleClick0Head : nonoverlap
 {
@@ -160,11 +160,11 @@ MouseDoubleClick0BustFemale : nonoverlap
 	'\0\s[5]心は、ここに宿るそうです。'
 	'\0\s[1]な、何も隠してないですよ…？'
 	--
-	if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
-		'\![raise,OnMakeScreenshotFile]\e'
-	} else {
+	//if (DialyFlag == 1) && !ISVAR('dialyexpss') && !RAND(2) {
+	//	'\![raise,OnMakeScreenshotFile]\e'
+	//} else {
 		'\e'
-	}
+	//}
 }
 MouseDoubleClick0
 {

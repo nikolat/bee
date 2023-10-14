@@ -91,7 +91,7 @@ sys.cs.Menu_EditDiary
 {
 	_url_ukadon     = 'https://ukadon.shillest.net/@beefriends'
 	_url_nostr      = 'https://relay-jp.nostr.wirednet.jp/index.html?npub18ee7ggjpp4uf77aurecqhtfpz5y0j95pd9hadrdsxt5we3pysnnqe8k224'
-	_url_bluesky    = 'https://bsky.link/feed?user=beefriends.bsky.social'
+	_url_bluesky    = 'https://bskyw.syui.ai/beefriends'
 	//_url_twitter    = 'http://twitter.com/beefriends'
 	//_url_haiku      = 'http://h.hatena.ne.jp/beefriends/'
 	//_url_friendfeed = 'http://friendfeed.com/beefriends'
@@ -140,7 +140,7 @@ sys.cs.Menu_AboutDialy
 		個人情報の扱いにはご注意ください。\n/
 		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊\n/
 	'
-	_ret += AYATEMPLATE.MenuItem('絵日記について', 'Menu_AboutPicture', 0)
+	//_ret += AYATEMPLATE.MenuItem('絵日記について', 'Menu_AboutPicture', 0)
 	_ret += AYATEMPLATE.MenuItem('戻る'          , 'Menu_EditDiary'  , 100)
 	'\0\s[0]\_q' + _ret + '\_q\e'
 }

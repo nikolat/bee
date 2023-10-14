@@ -484,7 +484,7 @@ OnGhostCallComplete
 			\nいっしょにお喋りしよう？\e'
 	} else {
 		dialyexp ,= "OtherGhostBooted_%(reference[0])"
-		sys.fnc.makescreenshotfile()
+		//sys.fnc.makescreenshotfile()
 	}
 }
 OnOtherGhostClosed

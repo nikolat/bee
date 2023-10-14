@@ -363,12 +363,12 @@ sys.key.r
 		'\![reload,shiori]\0\s[0]リロードしました。\e'
 	}
 }
-sys.key.s
-{
-	if basewarenameex == 'SSP' {
-		sys.fnc.makescreenshotfile()
-	}
-}
+//sys.key.s
+//{
+//	if basewarenameex == 'SSP' {
+//		sys.fnc.makescreenshotfile()
+//	}
+//}
 sys.key.t
 {
 	OnAiTalk()
