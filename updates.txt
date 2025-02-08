@@ -5,7 +5,7 @@ file,ghost/master/dic/emerg/yaya_emerg_dic.dica4adcbbaeba086c3c6b5ec2eaea27d23
 file,ghost/master/dic/ex/yaya_kanade.dic3b1a8f731609e518c0c3777826d555ebsize=3708date=2012-12-21T00:00:00
 file,ghost/master/dic/ex/yaya_mgl.dic88dff491eb537765404b14e56bfd7d13size=27908date=2012-12-21T00:00:00
 file,ghost/master/dic/ex/yaya_property.dicc36c13362b0da2d27c52a8eb720bd11asize=13979date=2012-12-21T00:00:00
-file,ghost/master/dic/normal/yaya_aitalk.dic1f436220d4a312084e7220b6497ecb8dsize=47581date=2012-12-21T00:00:00
+file,ghost/master/dic/normal/yaya_aitalk.dicf692499cff89a8443c4af608dba571b5size=47620date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_bootend.dicabfb4220e6bfc64257b8438676c6edbbsize=29045date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_communicate.dic14263ba072de5581408ce995790ccc14size=4987date=2012-12-21T00:00:00
 file,ghost/master/dic/normal/yaya_diary.dic3c2674382b8b2a6b928acb625bda7f8csize=5610date=2012-12-21T00:00:00
@@ -22,7 +22,7 @@ file,ghost/master/dic/system/_loading_order.txt0868241bb617c7c18013e2c024d18dd9
 file,ghost/master/dic/system/yaya_base/_loading_order.txt9c350c2c9c08f635bff5eaae149af8c8size=103date=2012-12-21T00:00:00
 file,ghost/master/dic/system/yaya_base/config.dic44707dafa1e7e605e2816ca68c2a84f9size=2592date=2012-12-21T00:00:00
 file,ghost/master/dic/system/yaya_base/optional.dicff4da728a656a8aa6a38939e654c51f2size=9953date=2012-12-21T00:00:00
-file,ghost/master/dic/system/yaya_base/shiori3.dic18b395e9ffcd3fb772ded9046ed4b57csize=54846date=2012-12-21T00:00:00
+file,ghost/master/dic/system/yaya_base/shiori3.dicac4750d7081a6607ac1c26184677020asize=55020date=2012-12-21T00:00:00
 file,ghost/master/icon.icoa3b0fec19022d360ec024caa8adc127bsize=56601date=2012-12-21T00:00:00
 file,ghost/master/image/ca0.png70dd9989412eb14b0b289c9010dd2d28size=1989date=2012-12-21T00:00:00
 file,ghost/master/image/causer.png4bc7d3a94e66c4bd06a9f25fbb5fcee4size=130date=2012-12-21T00:00:00
@@ -35,7 +35,7 @@ file,ghost/master/saori/screenshot.dll1fe4f24d4d4cd52a1b3f170b362e6e58size=614
 file,ghost/master/saori/screenshot_readme.txt85c42445b0b6bedb89d67d070e1c6f54size=1959date=2012-12-21T00:00:00
 file,ghost/master/screenshot/readme.txt9e50d0feda3ad789d38fbfc1c3e643ffsize=285date=2012-12-21T00:00:00
 file,ghost/master/system_config.txt3965602fadd8acb2ee46c0310704c3e1size=682date=2012-12-21T00:00:00
-file,ghost/master/yaya.dll56e3af56c88e696cea1f39d53b239cefsize=880640date=2012-12-21T00:00:00
+file,ghost/master/yaya.dll7ca71c0691df0379655530fcf6d0fa7csize=884736date=2012-12-21T00:00:00
 file,ghost/master/yaya.txt73fadac0906f125f376733401d366e81size=2463date=2012-12-21T00:00:00
 file,ghost/master/yaya_emerg.txtd9ee78e2068ff80d809325bd4fa8228bsize=1055date=2012-12-21T00:00:00
 file,install.txtb870b082a6cd52d80dd6cb6da3d1b903size=63date=2012-12-21T00:00:00
